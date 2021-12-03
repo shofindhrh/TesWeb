@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TesWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Pelanggan">
+    <Key>
+      <PropertyRef Name="PelangganID" />
+    </Key>
+    <Property Name="PelangganID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nama" Type="varchar" MaxLength="100" />
+    <Property Name="Alamat" Type="varchar(max)" />
+    <Property Name="NoTelp" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Produk">
+    <Key>
+      <PropertyRef Name="ProdukID" />
+    </Key>
+    <Property Name="ProdukID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nama" Type="varchar" MaxLength="100" />
+    <Property Name="Harga" Type="int" />
+    <Property Name="Deskripsi" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TesWeb.dbo.Transaksi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Transaksi">
+    <Key>
+      <PropertyRef Name="KodeTransaksi" />
+    </Key>
+    <Property Name="TransaksiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KodeTransaksi" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tanggal" Type="date" />
+    <Property Name="PelangganID" Type="int" />
+    <Property Name="Total" Type="int" />
+  </EntityType>
+  <EntityContainer Name="TesWebModelStoreContainer">
+    <EntitySet Name="Pelanggan" EntityType="Self.Pelanggan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produk" EntityType="Self.Produk" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaksi" EntityType="Self.Transaksi" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Transaksi].[TransaksiID] AS [TransaksiID], 
+    [Transaksi].[KodeTransaksi] AS [KodeTransaksi], 
+    [Transaksi].[Tanggal] AS [Tanggal], 
+    [Transaksi].[PelangganID] AS [PelangganID], 
+    [Transaksi].[Total] AS [Total]
+    FROM [dbo].[Transaksi] AS [Transaksi]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

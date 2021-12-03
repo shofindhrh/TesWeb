@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TesWebModelStoreContainer" CdmEntityContainer="TesWebEntities">
+    <EntitySetMapping Name="Pelanggans">
+      <EntityTypeMapping TypeName="TesWebModel.Pelanggan">
+        <MappingFragment StoreEntitySet="Pelanggan">
+          <ScalarProperty Name="PelangganID" ColumnName="PelangganID" />
+          <ScalarProperty Name="Nama" ColumnName="Nama" />
+          <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+          <ScalarProperty Name="NoTelp" ColumnName="NoTelp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produks">
+      <EntityTypeMapping TypeName="TesWebModel.Produk">
+        <MappingFragment StoreEntitySet="Produk">
+          <ScalarProperty Name="ProdukID" ColumnName="ProdukID" />
+          <ScalarProperty Name="Nama" ColumnName="Nama" />
+          <ScalarProperty Name="Harga" ColumnName="Harga" />
+          <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transaksis">
+      <EntityTypeMapping TypeName="TesWebModel.Transaksi">
+        <MappingFragment StoreEntitySet="Transaksi">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="PelangganID" ColumnName="PelangganID" />
+          <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+          <ScalarProperty Name="KodeTransaksi" ColumnName="KodeTransaksi" />
+          <ScalarProperty Name="TransaksiID" ColumnName="TransaksiID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

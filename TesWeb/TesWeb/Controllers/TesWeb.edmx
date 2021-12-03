@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TesWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pelanggan">
+          <Key>
+            <PropertyRef Name="PelangganID" />
+          </Key>
+          <Property Name="PelangganID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="100" />
+          <Property Name="Alamat" Type="varchar(max)" />
+          <Property Name="NoTelp" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Produk">
+          <Key>
+            <PropertyRef Name="ProdukID" />
+          </Key>
+          <Property Name="ProdukID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="100" />
+          <Property Name="Harga" Type="int" />
+          <Property Name="Deskripsi" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TesWeb.dbo.Transaksi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Transaksi">
+          <Key>
+            <PropertyRef Name="KodeTransaksi" />
+          </Key>
+          <Property Name="TransaksiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KodeTransaksi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tanggal" Type="date" />
+          <Property Name="PelangganID" Type="int" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <EntityContainer Name="TesWebModelStoreContainer">
+          <EntitySet Name="Pelanggan" EntityType="Self.Pelanggan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produk" EntityType="Self.Produk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaksi" EntityType="Self.Transaksi" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Transaksi].[TransaksiID] AS [TransaksiID], 
+    [Transaksi].[KodeTransaksi] AS [KodeTransaksi], 
+    [Transaksi].[Tanggal] AS [Tanggal], 
+    [Transaksi].[PelangganID] AS [PelangganID], 
+    [Transaksi].[Total] AS [Total]
+    FROM [dbo].[Transaksi] AS [Transaksi]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TesWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pelanggan">
+          <Key>
+            <PropertyRef Name="PelangganID" />
+          </Key>
+          <Property Name="PelangganID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Alamat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NoTelp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Produk">
+          <Key>
+            <PropertyRef Name="ProdukID" />
+          </Key>
+          <Property Name="ProdukID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Harga" Type="Int32" />
+          <Property Name="Deskripsi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="TesWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pelanggans" EntityType="Self.Pelanggan" />
+          <EntitySet Name="Produks" EntityType="Self.Produk" />
+          <EntitySet Name="Transaksis" EntityType="TesWebModel.Transaksi" />
+        </EntityContainer>
+        <EntityType Name="Transaksi">
+          <Key>
+            <PropertyRef Name="KodeTransaksi" />
+          </Key>
+          <Property Name="TransaksiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KodeTransaksi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tanggal" Type="DateTime" Precision="0" />
+          <Property Name="PelangganID" Type="Int32" />
+          <Property Name="Total" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TesWebModelStoreContainer" CdmEntityContainer="TesWebEntities">
+          <EntitySetMapping Name="Pelanggans">
+            <EntityTypeMapping TypeName="TesWebModel.Pelanggan">
+              <MappingFragment StoreEntitySet="Pelanggan">
+                <ScalarProperty Name="PelangganID" ColumnName="PelangganID" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+                <ScalarProperty Name="NoTelp" ColumnName="NoTelp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produks">
+            <EntityTypeMapping TypeName="TesWebModel.Produk">
+              <MappingFragment StoreEntitySet="Produk">
+                <ScalarProperty Name="ProdukID" ColumnName="ProdukID" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+                <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaksis">
+            <EntityTypeMapping TypeName="TesWebModel.Transaksi">
+              <MappingFragment StoreEntitySet="Transaksi">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="PelangganID" ColumnName="PelangganID" />
+                <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+                <ScalarProperty Name="KodeTransaksi" ColumnName="KodeTransaksi" />
+                <ScalarProperty Name="TransaksiID" ColumnName="TransaksiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

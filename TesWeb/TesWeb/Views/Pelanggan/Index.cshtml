@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TesWeb.Controllers.Pelanggan>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pelanggan</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nama)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alamat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoTelp)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alamat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoTelp)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PelangganID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PelangganID })
+        </td>
+    </tr>
+}
+
+</table>
